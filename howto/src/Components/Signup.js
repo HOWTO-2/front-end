@@ -66,9 +66,11 @@ export default function Signup(props) {
 
 
     return (
+
         <StyledForm
             onSubmit={onSubmit}
         >
+      <button disabled={disabled}> Sign Up </button>
             <div>{errors.email}</div>
             <div>{errors.password}</div>
 
@@ -76,20 +78,21 @@ export default function Signup(props) {
 
             <StyledLabel>First Name
                 <StyledInput
-                        name='fname'
+                        name='fName'
                         type='text'
                         maxLength='15'
                         onChange={onInputChange}
-                        value={values.fname}
+                        value={values.fName}
                     />
             </StyledLabel>
             <StyledLabel>Last Name
         <StyledInput
-                    name='lname'
+                    name='lName'
+
                     type='text'
                     maxLength='15'
                     onChange={onInputChange}
-                    value={values.lname}
+                    value={values.lName}
                 />
             </StyledLabel>
             <StyledLabel>Email

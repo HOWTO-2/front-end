@@ -32,12 +32,14 @@ export default function Header(props){
         <StyledHeader>
             <StyledNav>
             {/* <nav> will change into Links once completed */}
-                <a href="#">Home</a>
-                <a>Log In</a>
-                <a>Sign Up</a>                             
+
+                <Link to='/'>Home</Link>
+                <Link to='/login'>Log In</Link>
+                <Link to='/signup'>Sign Up</Link>                                
             </StyledNav>
             <StyledLogo src='http://www.pngmart.com/files/7/Red-Smoke-Transparent-Images-PNG.png' />
         </StyledHeader>
+
     )
 
 }

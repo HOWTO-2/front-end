@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
+import {Route} from 'react-router-dom'
 
 
 // COMPONENT IMPORTS
@@ -8,6 +9,7 @@ import Header from './Components/Header'
 import HowToCard from './Components/HowToCard'
 import Signup from './Components/Signup'
 import formSchema from './Components/Validation/FormSchema'
+import Login from './Components/Login'
 
 import styled from 'styled-components'
 
@@ -198,6 +200,7 @@ function App() {
       email: signUpFormValues.email.trim(),
     }
     postNewUser(newUser)
+    
   }
 
   const submitCard = () => {
@@ -226,6 +229,7 @@ function App() {
   return (
     <StyledBody>
       <Header />
+
       <StyledTopDiv>
 
         <StyledUpperTopDiv>
@@ -233,6 +237,7 @@ function App() {
         </StyledUpperTopDiv>
 
         <StyledLowerTopDiv>
+    <Route path='/signup'>
           <Signup
             values={signUpFormValues}
             inputChange={inputChange}        
@@ -240,6 +245,7 @@ function App() {
             disabled={disabled}
             errors={formErrors} 
             />
+     </Route>
           <StyledList>
             <li>Is Useful</li>
             <li>Learn whatever</li>
@@ -251,6 +257,7 @@ function App() {
         </StyledLowerTopDiv>
 
       </StyledTopDiv>
+    <Route exact path='/'>
 
       <StyledCardsDiv>
           <h2>Popular How To's!</h2>
@@ -260,7 +267,12 @@ function App() {
             )
           })}
       </StyledCardsDiv>
+  </Route>
+      <Route path ='/login'>
+        <Login />
+      </Route>
     </StyledBody>
+
   );
 }
 
