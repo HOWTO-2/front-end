@@ -17,7 +17,7 @@ export default function Login(props) {
                 name='password'
                 type='password'
                 maxLength='15'
-            // value={}
+            // value={props.username}
             // onChange={}
             />
         </label>

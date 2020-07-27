@@ -138,7 +138,7 @@ function App() {
       email: signUpFormValues.email.trim(),
     }
     postNewUser(newUser)
-    setSignUpFormValues(initialSignupValue)
+    
   }
 
   const submitCard = () => {
@@ -185,8 +185,7 @@ function App() {
       </Route>
       <Route path ='/login'>
         <Login />
-      </Route>   
-
+      </Route>
     </div>
   );
 }
