@@ -17,6 +17,10 @@ const formSchema = yup.object().shape({
         .string()
         .min(8, "Passwords need 6 charas")
         .required('Password is required'),
+    username: yup
+    .string()
+    .min(8,'username please')
+    .required('username is required')
 
 });
 
