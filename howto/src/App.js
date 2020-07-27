@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
+import {Route} from 'react-router-dom'
 
 
 // COMPONENT IMPORTS
@@ -8,6 +9,7 @@ import Header from './Components/Header'
 import HowToCard from './Components/HowToCard'
 import Signup from './Components/Signup'
 import formSchema from './Components/Validation/FormSchema'
+import Login from './Components/Login'
 
 
 /////////////////////////////////(╯°□°）╯︵ ┻━┻
@@ -136,6 +138,7 @@ function App() {
       email: signUpFormValues.email.trim(),
     }
     postNewUser(newUser)
+    
   }
 
   const submitCard = () => {
@@ -164,12 +167,14 @@ function App() {
   return (
     <div>
       <Header />
+      <Route exact path='/'>
       {howToCards.map(card=>{
         return(
           <HowToCard key={card.id} card={card}/>
         )
       })}
-      
+      </Route>
+      <Route path='/signup'>
       <Signup
         values={signUpFormValues}
         inputChange={inputChange}        
@@ -177,7 +182,10 @@ function App() {
         disabled={disabled}
         errors={formErrors} 
         />
-
+      </Route>
+      <Route path ='/login'>
+        <Login />
+      </Route>
     </div>
   );
 }

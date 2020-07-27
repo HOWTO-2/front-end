@@ -8,9 +8,9 @@ export default function Header(props){
         <header>
             <nav>
             {/* <nav> will change into Links once completed */}
-                <a href="#">Home</a>
-                <a>Log In</a>
-                <a>Sign Up</a>                             
+                <Link to='/'>Home</Link>
+                <Link to='/login'>Log In</Link>
+                <Link to='/signup'>Sign Up</Link>                           
             </nav>
         </header>
     )

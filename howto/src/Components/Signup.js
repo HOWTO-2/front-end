@@ -24,29 +24,26 @@ export default function Signup(props) {
 
 
     return (
-        <form
-            onSubmit={onSubmit}
-        >
+        <form onSubmit={onSubmit}>
             <button disabled={disabled}> Sign Up </button>
             <div>{errors.email}</div>
             <div>{errors.password}</div>
-
-            <label>First Name
+            <label>FirstName
             <input
-                    name='fname'
+                    name='fName'
                     type='text'
                     maxLength='15'
                     onChange={onInputChange}
-                    value={values.fname}
+                    value={values.fName}
                 />
             </label>
             <label>Last Name
         <input
-                    name='lname'
+                    name='lName'
                     type='text'
                     maxLength='15'
                     onChange={onInputChange}
-                    value={values.lname}
+                    value={values.lName}
                 />
             </label>
             <label>Email
