@@ -11,68 +11,110 @@ import Signup from './Components/Signup'
 import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
 
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const StyledCardsDiv = styled.div`
 display:flex;
 flex-direction: column;
 align-items: center;
+.cardsHeading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background: black;
+  width: 100%;
+  h1{
+    padding: 5px 15px;
+    font-size: 1.5rem;
+  }
+  form{
+    input{
+      font-size: 1.5rem;
+      border-radius: 6px;
+      background: violet;
+      color: teal;
+      border: 1px solid black;
+    }
+    select{
+      color: white;
+      font-size: 1.3rem;
+      background: black;
+      border: 0px solid silver;
+      option{
+        font-size: 2rem;
+      }
+    }
+  }
+  h3{
+    padding: 5px;
+    font-size: 1rem;
+  }
+}
 h2{
   font-size: 2rem;
 }
 `
 
 const StyledBody = styled.body`
-background: purple;
+background: url(
+  'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
+);
+background-size: cover;
 display: flex;
 flex-direction: column;
 width: 100%;
 `
 
 const StyledTopDiv = styled.div`
-background: url('https://upload.wikimedia.org/wikipedia/commons/8/86/Alongtheriver_QingMing.jpg');
+background: url('https://images.unsplash.com/photo-1595864612598-33be0c23b00f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
 background-position: center;
+background-size: 1920px 1080px;
 width: 100%;
 display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
-border: 10px solid cyan;
 `
 const StyledUpperTopDiv = styled.div`
 display: flex;
+flex-direction: column;
+align-items: center;
 justify-content: center;
-font-size: 4rem;
-color: yellow;
-border: 1px solid white;
+padding: 2%;
+font-size: 1.5rem;
+color: black;
+font-family: garamond;
 width: 40%;
 `
 
 const StyledLowerTopDiv = styled.div`
 display: flex;
-flex-direction: row;
-justify-content: space-between;
-border: 2px solid black;
+align-items: center;
+justify-content: space-evenly;
+padding: 2%;
 width: 95%;
 `
-
-const StyledList = styled.ul`
-font-size: 2rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-width: 20%;
-border: 2px solid yellow;
-li {
-  color: white;
-  margin: 3%;
+const kfLogo = keyframes`
+100%{
+   background teal;
+   color: black;
+   border: 1px solid teal;
 }
 `
-
 const StyledLogo = styled.img`
-width: 60%;
-border: 5px solid blue;
+width: 20%;
+border: 1px solid gray;
+border-radius: 50% 50%;
+margin: 150px 0px 32px 0px;
+color: white;
+background: none;
+padding: 5px;
+box-shadow: 0px 0px 80px 1px;
+animation: ${kfLogo} 1.3s ease-in-out forwards;
 `
+
+
 
 /////////////////////////////////(╯°□°）╯︵ ┻━┻
 /////Empty Form Structures//////(╯°□°）╯︵ ┻━┻
@@ -233,44 +275,57 @@ function App() {
       <StyledTopDiv>
 
         <StyledUpperTopDiv>
-          <h1>How To</h1>
+          <h1>
+            "If you think you can do a thing or think that you can't, you're right." - Henry Ford
+          </h1>
+          
         </StyledUpperTopDiv>
 
         <StyledLowerTopDiv>
-    <Route path='/signup'>
-          <Signup
-            values={signUpFormValues}
-            inputChange={inputChange}        
-            submit={submitUser}
-            disabled={disabled}
-            errors={formErrors} 
-            />
-     </Route>
-          <StyledList>
-            <li>Is Useful</li>
-            <li>Learn whatever</li>
-            <li>Fun and simple to use</li>
-            <li>Share your life hacks</li>
-            <li>You should use it</li>
-          </StyledList>
-          <StyledLogo src='http://www.pngmart.com/files/7/Red-Smoke-Transparent-Images-PNG.png' />
+          <Route path='/signup'>
+            <Signup
+              values={signUpFormValues}
+              inputChange={inputChange}        
+              submit={submitUser}
+              disabled={disabled}
+              errors={formErrors} 
+              />
+          </Route>
+          <Route exact path = '/'>
+
+          <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
+          </Route>
+          <Route path ='/login'>
+            <Login />
+          </Route>
         </StyledLowerTopDiv>
 
       </StyledTopDiv>
     <Route exact path='/'>
 
       <StyledCardsDiv>
-          <h2>Popular How To's!</h2>
+        <div className='cardsHeading'>
+          <h1>Popular How To's!</h1>
+          <form>
+            <input type="text" placeholder="Search.."/>
+          </form>
+          <form>
+          <select>
+            <option>Select a Category</option>
+            <option>Home and Living</option>
+            <option>Business</option>
+            <option>Health</option>
+            <option>Educational</option>
+          </select>
+          </form>
+        </div>
           {howToCards.map(card=>{
             return(
             <HowToCard key={card.id} card={card}/>
             )
           })}
       </StyledCardsDiv>
-  </Route>
-      <Route path ='/login'>
-        <Login />
-      </Route>
+    </Route>
     </StyledBody>
 
   );
