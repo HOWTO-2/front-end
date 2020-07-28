@@ -5,9 +5,24 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router} from 'react-router-dom'
 
+
+//REDUX IMPORTS//
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import { reducer } from "./Components/Store/reducers/reducer";
+
+
+const store = createStore(reducer, applyMiddleware(thunk, logger));
+
 ReactDOM.render(
   <React.StrictMode>
-    <Router><App /></Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
