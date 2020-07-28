@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`
-background: pink;
-padding: 5px;
-border: 5px solid indigo;
+background: black;
+color: white;
+padding: 4px;
 display: flex;
-flex-direction: row;
+flex-direction: row-reverse;
 justify-content: space-between;
 `
 
@@ -15,16 +15,44 @@ const StyledNav = styled.nav`
 display: flex;
 justify-content: space-evenly;
 align-items: center;
-border: 5px solid blue;
-width: 50%;
-background: white;
+font-size: 1rem;
+font-weight: bold;
+width: 18%;
+#loginlink{
+    background: orange;
+    border-radius: 13px;
+    &:hover{
+        background: white;
+        color: orange;
+    }
+}
+.navlink {
+    padding: 13px;
+    color: white;
+    &:hover {
+        border-radius: 13px;
+        background: teal;
+    }
+}
+`
+
+const StyledHowTo = styled.div`
+display: flex;
+justify-content: space-evenly;
+width: 15%;
+font-size: 1rem;
+color: purple;
 `
 
 
 const StyledLogo = styled.img`
-width: 5%;
-border: 5px solid blue;
+width: 17%;
+border: 5px solid cyan;
+border-radius: 50% 50%;
+background: teal;
+padding: 3px;
 `
+
 
 export default function Header(props){
 
@@ -33,11 +61,16 @@ export default function Header(props){
             <StyledNav>
             {/* <nav> will change into Links once completed */}
 
-                <Link to='/'>Home</Link>
-                <Link to='/login'>Log In</Link>
-                <Link to='/signup'>Sign Up</Link>                                
+                <Link to='/' className='navlink'>Home</Link>
+                    {'|'}
+                <Link to='/signup' className='navlink'>Sign Up</Link> 
+                    {'|'}
+                <Link to='/login' className='navlink' id='loginlink'>Log In</Link>                        
             </StyledNav>
-            <StyledLogo src='http://www.pngmart.com/files/7/Red-Smoke-Transparent-Images-PNG.png' />
+            <StyledHowTo>
+                <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
+                <h3>How To</h3>
+            </StyledHowTo>
         </StyledHeader>
 
     )

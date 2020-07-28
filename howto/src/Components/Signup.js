@@ -1,21 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 
 const StyledForm = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-background: maroon;
-width: 15%;
-padding: 10px;
-border: 5px solid red;
+background: black;
+color: white;
+width: 20%;
+padding: 30px;
+margin: 1px;
+border-radius: 20% 20%;
+box-shadow: 0px 0px 80px 5px;
 `
 
 const StyledText = styled.h2`
-border: 2px solid green;
 text-align: center;
-color: teal;
+color: white;
 `
 
 const StyledLabel = styled.label`
@@ -23,26 +25,35 @@ display: flex;
 flex-direction: column;
 align-items: center;
 font-size: 1rem;
-color: yellow;
-background: purple;
-border: 5px solid white;
+color: white;
 `
 
 const StyledInput = styled.input`
-color: red;
-background: blue;
-border: 5px solid green;
-&:hover{
-    background: black;
-}
+color: lightblue;
+background: black;
+font-size: 1.3rem;
+border: 1px solid gray;
+padding: 5px;
+border-radius: 10px;
 `
 
 const StyledButton = styled.button`
-color: cyan;
-background: orange;
-border: 5px solid pink;
-border-radius: 10px;
+color: white;
+background: green;
+width: 40%;
+padding: 5px;
+border-radius: 15px;
 `
+
+const StyledLogo = styled.img`
+width: 12%;
+border: 5px solid cyan;
+border-radius: 50% 50%;
+background: teal;
+padding: 3px;
+`
+
+
 
 
 export default function Signup(props) {
@@ -66,14 +77,12 @@ export default function Signup(props) {
 
 
     return (
-
         <StyledForm
             onSubmit={onSubmit}
-        >
-      <button disabled={disabled}> Sign Up </button>
+            >
             <div>{errors.email}</div>
             <div>{errors.password}</div>
-
+            <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
             <StyledText>Sign up and create posts!</StyledText>
 
             <StyledLabel>First Name
@@ -83,18 +92,20 @@ export default function Signup(props) {
                         maxLength='15'
                         onChange={onInputChange}
                         value={values.fName}
-                    />
+                        />
             </StyledLabel>
+
             <StyledLabel>Last Name
         <StyledInput
                     name='lName'
-
+                    
                     type='text'
                     maxLength='15'
                     onChange={onInputChange}
                     value={values.lName}
-                />
+                    />
             </StyledLabel>
+
             <StyledLabel>Email
                 <StyledInput
                     name='email'
@@ -102,8 +113,9 @@ export default function Signup(props) {
                     maxLength='25'
                     onChange={onInputChange}
                     value={values.email}
-                />
+                    />
             </StyledLabel>
+
             <StyledLabel>Username
                 <StyledInput
                     name='username'
@@ -111,8 +123,9 @@ export default function Signup(props) {
                     maxLength='15'
                     onChange={onInputChange}
                     value={values.username}
-                />
+                    />
             </StyledLabel>
+
             <StyledLabel>Password
                 <StyledInput
                     name='password'
@@ -121,10 +134,11 @@ export default function Signup(props) {
                     minLength='7'
                     onChange={onInputChange}
                     value={values.password}
-                />
+                    />
             </StyledLabel>
             <br></br>
             <StyledButton disabled={disabled}> Sign Up </StyledButton>
+
         </StyledForm >
     )
 }
