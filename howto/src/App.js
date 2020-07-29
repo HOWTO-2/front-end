@@ -4,6 +4,10 @@ import * as yup from 'yup'
 import {Route} from 'react-router-dom'
 
 
+//REDUX IMPORTS//
+import { connect } from "react-redux"; 
+
+
 // COMPONENT IMPORTS
 import Header from './Components/Header'
 import HowToCard from './Components/HowToCard'
@@ -12,6 +16,7 @@ import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
 
 import styled, { keyframes } from 'styled-components'
+
 
 const StyledCardsDiv = styled.div`
 display:flex;
@@ -330,5 +335,10 @@ function App() {
 
   );
 }
-
-export default App;
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    
+  };
+};
+export default connect(mapStateToProps,{})(App);
