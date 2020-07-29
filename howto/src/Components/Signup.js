@@ -98,7 +98,6 @@ export default function Signup(props) {
             <StyledLabel>Last Name
         <StyledInput
                     name='lName'
-                    
                     type='text'
                     maxLength='15'
                     onChange={onInputChange}

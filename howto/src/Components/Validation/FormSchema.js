@@ -14,12 +14,27 @@ const formSchema = yup.object().shape({
         .required("Must include email address."),
     password: yup
         .string()
-        .min(8, "Passwords need 6 charas")
+        .min(8, "Passwords need 6 characters")
         .required('Password is required'),
     username: yup
         .string()
         .min(8, 'username please')
-        .required('username is required')
+        .required('username is required'),
+    title: yup
+        .string()
+        .min(6, 'title please' )
+        .required('Must include title'),
+    author: yup
+        .string()
+        .min(3, 'Names must use at least 3 characters')
+        .required('Must include a name'),
+    topic: yup
+        .string()
+        .min(8, 'Please describe what your post explains to do')
+        .required('Must include a topic'),
+    steps: yup
+        .string()
+        .required('A guide is required')
 
 });
 
