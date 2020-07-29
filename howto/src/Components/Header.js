@@ -1,45 +1,34 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import styled from 'styled-components'
-
-const StyledHeader = styled.header`
-background: pink;
-padding: 5px;
-border: 5px solid indigo;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-`
-
-const StyledNav = styled.nav`
-display: flex;
-justify-content: space-evenly;
-align-items: center;
-border: 5px solid blue;
-width: 50%;
-background: white;
-`
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-const StyledLogo = styled.img`
-width: 5%;
-border: 5px solid blue;
-`
+export default function Header(props) {
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            '& > *': {
+                margin: theme.spacing(1),
+            },
+        },
+    }));
+    const classes = useStyles();
 
-export default function Header(props){
+    return (
+        <header className={classes.root}>
 
-    return(
-        <StyledHeader>
-            <StyledNav>
-            {/* <nav> will change into Links once completed */}
 
-                <Link to='/'>Home</Link>
-                <Link to='/login'>Log In</Link>
-                <Link to='/signup'>Sign Up</Link>                                
-            </StyledNav>
-            <StyledLogo src='http://www.pngmart.com/files/7/Red-Smoke-Transparent-Images-PNG.png' />
-        </StyledHeader>
+            <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+                <Button component={Link} to='/'>Home</Button>
+                <Button component={Link} to='/login'>Log In</Button>
+                <Button component={Link} to='/signup'>Sign Up</Button>
+            </ButtonGroup>
 
+        </header>
     )
 
 }

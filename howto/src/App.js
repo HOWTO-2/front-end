@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
+
 
 
 // COMPONENT IMPORTS
@@ -10,69 +11,8 @@ import HowToCard from './Components/HowToCard'
 import Signup from './Components/Signup'
 import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
+import HowToCards from './Components/HowToCards'
 
-import styled from 'styled-components'
-
-const StyledCardsDiv = styled.div`
-display:flex;
-flex-direction: column;
-align-items: center;
-h2{
-  font-size: 2rem;
-}
-`
-
-const StyledBody = styled.body`
-background: purple;
-display: flex;
-flex-direction: column;
-width: 100%;
-`
-
-const StyledTopDiv = styled.div`
-background: url('https://upload.wikimedia.org/wikipedia/commons/8/86/Alongtheriver_QingMing.jpg');
-background-position: center;
-width: 100%;
-display: flex;
-flex-direction: column;
-justify-content: space-evenly;
-align-items: center;
-border: 10px solid cyan;
-`
-const StyledUpperTopDiv = styled.div`
-display: flex;
-justify-content: center;
-font-size: 4rem;
-color: yellow;
-border: 1px solid white;
-width: 40%;
-`
-
-const StyledLowerTopDiv = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-border: 2px solid black;
-width: 95%;
-`
-
-const StyledList = styled.ul`
-font-size: 2rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-width: 20%;
-border: 2px solid yellow;
-li {
-  color: white;
-  margin: 3%;
-}
-`
-
-const StyledLogo = styled.img`
-width: 60%;
-border: 5px solid blue;
-`
 
 /////////////////////////////////(╯°□°）╯︵ ┻━┻
 /////Empty Form Structures//////(╯°□°）╯︵ ┻━┻
@@ -200,7 +140,7 @@ function App() {
       email: signUpFormValues.email.trim(),
     }
     postNewUser(newUser)
-    
+
   }
 
   const submitCard = () => {
@@ -227,53 +167,30 @@ function App() {
   }, [signUpFormValues])
 
   return (
-    <StyledBody>
+    <div>
       <Header />
-
-      <StyledTopDiv>
-
-        <StyledUpperTopDiv>
-          <h1>How To</h1>
-        </StyledUpperTopDiv>
-
-        <StyledLowerTopDiv>
-    <Route path='/signup'>
-          <Signup
-            values={signUpFormValues}
-            inputChange={inputChange}        
-            submit={submitUser}
-            disabled={disabled}
-            errors={formErrors} 
-            />
-     </Route>
-          <StyledList>
-            <li>Is Useful</li>
-            <li>Learn whatever</li>
-            <li>Fun and simple to use</li>
-            <li>Share your life hacks</li>
-            <li>You should use it</li>
-          </StyledList>
-          <StyledLogo src='http://www.pngmart.com/files/7/Red-Smoke-Transparent-Images-PNG.png' />
-        </StyledLowerTopDiv>
-
-      </StyledTopDiv>
-    <Route exact path='/'>
-
-      <StyledCardsDiv>
-          <h2>Popular How To's!</h2>
-          {howToCards.map(card=>{
-            return(
-            <HowToCard key={card.id} card={card}/>
-            )
-          })}
-      </StyledCardsDiv>
-  </Route>
-      <Route path ='/login'>
+      <Route exact path='/'>
+        <HowToCards howToCards={howToCards} />
+      </Route>
+      <Route path='/signup'>
+        <Signup
+          values={signUpFormValues}
+          inputChange={inputChange}
+          submit={submitUser}
+          disabled={disabled}
+          errors={formErrors}
+        />
+      </Route>
+      <Route path='/login'>
         <Login />
       </Route>
-    </StyledBody>
-
+    </div>
   );
 }
 
 export default App;
+// {howToCards.map(card => {
+//   return (
+//     <HowToCard key={card.id} card={card} />
+//   )
+// })}

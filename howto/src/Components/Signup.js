@@ -1,48 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import AppBar from 'material-ui/AppBar'
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
-const StyledForm = styled.form`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: maroon;
-width: 15%;
-padding: 10px;
-border: 5px solid red;
-`
-
-const StyledText = styled.h2`
-border: 2px solid green;
-text-align: center;
-color: teal;
-`
-
-const StyledLabel = styled.label`
-display: flex;
-flex-direction: column;
-align-items: center;
-font-size: 1rem;
-color: yellow;
-background: purple;
-border: 5px solid white;
-`
-
-const StyledInput = styled.input`
-color: red;
-background: blue;
-border: 5px solid green;
-&:hover{
-    background: black;
-}
-`
-
-const StyledButton = styled.button`
-color: cyan;
-background: orange;
-border: 5px solid pink;
-border-radius: 10px;
-`
 
 
 export default function Signup(props) {
@@ -63,68 +24,125 @@ export default function Signup(props) {
         e.preventDefault()
         submit()
     }
-
-
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            '& > *': {
+                margin: theme.spacing(1),
+                width: '25ch',
+            },
+        },
+    }));
+    const classes = useStyles();
     return (
-
-        <StyledForm
-            onSubmit={onSubmit}
-        >
-      <button disabled={disabled}> Sign Up </button>
+        <form className={classes.root} onSubmit={onSubmit}>
             <div>{errors.email}</div>
             <div>{errors.password}</div>
+            <TextField
+                placeholder="Enter Your First Name"
+                label="First Name"
+                variant="outlined"
+                onChange={onInputChange}
+                type='text'
+                name='fName'
+                value={values.fName}
+            />
+            <TextField
+                placeholder="Enter Your Last Name"
+                label="Last Name"
+                variant="outlined"
+                onChange={onInputChange}
+                name='lName'
+                type='text'
+                value={values.lName}
+            />
+            <TextField
+                placeholder="Enter Your Email"
+                label="Email Address"
+                variant="outlined"
+                onChange={onInputChange}
+                name='email'
+                type='email'
+                value={values.email}
+            />
+            <TextField
+                placeholder="Enter Your Username"
+                label="Username"
+                variant="outlined"
+                onChange={onInputChange}
+                name='username'
+                type='text'
+                value={values.username}
+            />
+            <TextField
+                placeholder="Enter Your Password"
+                label="Password"
+                variant="outlined"
+                onChange={onInputChange}
+                name='password'
+                type='password'
+                value={values.password}
 
-            <StyledText>Sign up and create posts!</StyledText>
-
-            <StyledLabel>First Name
-                <StyledInput
-                        name='fName'
-                        type='text'
-                        maxLength='15'
-                        onChange={onInputChange}
-                        value={values.fName}
-                    />
-            </StyledLabel>
-            <StyledLabel>Last Name
-        <StyledInput
-                    name='lName'
-
-                    type='text'
-                    maxLength='15'
-                    onChange={onInputChange}
-                    value={values.lName}
-                />
-            </StyledLabel>
-            <StyledLabel>Email
-                <StyledInput
-                    name='email'
-                    type='email'
-                    maxLength='25'
-                    onChange={onInputChange}
-                    value={values.email}
-                />
-            </StyledLabel>
-            <StyledLabel>Username
-                <StyledInput
-                    name='username'
-                    type='text'
-                    maxLength='15'
-                    onChange={onInputChange}
-                    value={values.username}
-                />
-            </StyledLabel>
-            <StyledLabel>Password
-                <StyledInput
-                    name='password'
-                    type='password'
-                    maxLength='15'
-                    minLength='7'
-                    onChange={onInputChange}
-                    value={values.password}
-                />
-            </StyledLabel>
-            <br></br>
-            <StyledButton disabled={disabled}> Sign Up </StyledButton>
-        </StyledForm >
+            />
+            <br/>
+            <Button
+                variant="contained"
+                disabled={disabled}
+                color="primary"
+            >
+                Sign Up
+              </Button>
+        </form >
     )
 }
+
+
+
+// <label>FirstName
+// <input
+//         name='fName'
+//         type='text'
+//         maxLength='15'
+//         onChange={onInputChange}
+//         value={values.fName}
+//     />
+// </label>
+// <label>Last Name
+// <input
+//         name='lName'
+//         type='text'
+//         maxLength='15'
+//         onChange={onInputChange}
+//         value={values.lName}
+//     />
+// </label>
+// <label>Email
+// <input
+//         name='email'
+//         type='email'
+//         maxLength='25'
+//         onChange={onInputChange}
+//         value={values.email}
+//     />
+// </label>
+// <label>Username
+// <input
+//         name='username'
+//         type='text'
+//         maxLength='15'
+//         onChange={onInputChange}
+//         value={values.username}
+//     />
+// </label>
+// <label>Password
+// <input
+//         name='password'
+//         type='password'
+//         maxLength='15'
+//         minLength='7'
+//         onChange={onInputChange}
+//         value={values.password}
+//     />
+// </label>
