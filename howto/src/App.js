@@ -6,7 +6,7 @@ import {Route} from 'react-router-dom'
 
 //REDUX IMPORTS//
 import { connect } from "react-redux"; 
-
+import { postUser, fetchHowto } from './Components/Store/actions/action'
 
 // COMPONENT IMPORTS
 import Header from './Components/Header'
@@ -154,7 +154,7 @@ const initialHowtoCards = []
 const initialUsers = []
 
 
-function App() {
+function App(props) {
   /////////////////////////(╯°□°）╯︵ ┻━┻
   //SignUpStates//////////(╯°□°）╯︵ ┻━┻
   ////////////////////////(╯°□°）╯︵ ┻━┻
@@ -173,8 +173,6 @@ function App() {
   ////////////┬─┬ ノ( ゜-゜ノ)
   ////AXIOSREQUESTFUNCTIONS┬─┬ ノ( ゜-゜ノ)
   ////////////////////////////////////////┬─┬ ノ( ゜-゜ノ)
-
-
   const getCards = () => {
     axios.get('https://reqres.in/api/users?page=2')
       .then(res => {
@@ -246,8 +244,7 @@ function App() {
       password: signUpFormValues.password.trim(),
       email: signUpFormValues.email.trim(),
     }
-    postNewUser(newUser)
-    
+    props.postUser(newUser)
   }
 
   const submitCard = () => {
@@ -264,7 +261,7 @@ function App() {
   ////////////WHATEFFECT///////////////
   ///////////////////////////////////
   useEffect(() => {
-    getCards()
+    props.fetchHowto()
   }, [])
 
   useEffect(() => {
@@ -296,10 +293,11 @@ function App() {
               errors={formErrors} 
               />
           </Route>
-          <Route exact path = '/'>
 
+          <Route exact path = '/'>
           <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
           </Route>
+
           <Route path ='/login'>
             <Login />
           </Route>
@@ -307,7 +305,6 @@ function App() {
 
       </StyledTopDiv>
     <Route exact path='/'>
-
       <StyledCardsDiv>
         <div className='cardsHeading'>
           <h1>Popular How To's!</h1>
@@ -324,13 +321,20 @@ function App() {
           </select>
           </form>
         </div>
-          {howToCards.map(card=>{
+        {props.isLoading && <h2>LOADING...</h2>}
+        {props.error && (<p>ERROR {this.props.error}</p>)}
+
+        {props.howto.length > 0 &&(
+          props.howto[0].map(card=>{
             return(
             <HowToCard key={card.id} card={card}/>
             )
-          })}
+          })
+        )}
+
       </StyledCardsDiv>
     </Route>
+
     </StyledBody>
 
   );
@@ -338,7 +342,9 @@ function App() {
 const mapStateToProps = state => {
   console.log(state)
   return {
-    
+    howto: state.howto,
+    isloading: state.isloading,
+    error: state.error
   };
 };
-export default connect(mapStateToProps,{})(App);
+export default connect(mapStateToProps,{postUser, fetchHowto})(App);
