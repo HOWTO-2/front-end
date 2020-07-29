@@ -10,8 +10,11 @@ import HowToCard from './Components/HowToCard'
 import Signup from './Components/Signup'
 import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
+import SearchBar from './Components/SearchBar'
+import AddHowToForm from './Components/AddHowToForm'
 
 import styled, { keyframes } from 'styled-components'
+
 
 const StyledCardsDiv = styled.div`
 display:flex;
@@ -29,13 +32,6 @@ align-items: center;
     font-size: 1.5rem;
   }
   form{
-    input{
-      font-size: 1.5rem;
-      border-radius: 6px;
-      background: violet;
-      color: teal;
-      border: 1px solid black;
-    }
     select{
       color: white;
       font-size: 1.3rem;
@@ -56,7 +52,7 @@ h2{
 }
 `
 
-const StyledBody = styled.body`
+const StyledBody = styled.div`
 background: url(
   'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
 );
@@ -233,6 +229,7 @@ function App() {
     })
   }
 
+
   const submitUser = () => {
     const newUser = {
       fName: signUpFormValues.fName.trim(),
@@ -247,7 +244,8 @@ function App() {
 
   const submitCard = () => {
     const newCard = {
-      username: howToFormValues.username.trim(),
+      title: howToFormValues.title.trim(),
+      author: howToFormValues.author.trim(),
       topic: howToFormValues.topic.trim(),
       steps: howToFormValues.steps.trim(),
     }
@@ -278,10 +276,20 @@ function App() {
           <h1>
             "If you think you can do a thing or think that you can't, you're right." - Henry Ford
           </h1>
-          
         </StyledUpperTopDiv>
 
         <StyledLowerTopDiv>
+
+          <Route path='/user/create'>  
+          {/* A workable link is commented out inside the Header Component */}
+            <AddHowToForm
+              inputChange={inputChange}
+              submit={submitCard}
+              disabled={disabled}
+              errors={formErrors}
+            />
+          </Route>
+
           <Route path='/signup'>
             <Signup
               values={signUpFormValues}
@@ -291,43 +299,48 @@ function App() {
               errors={formErrors} 
               />
           </Route>
-          <Route exact path = '/'>
 
-          <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
+          <Route exact path = '/'>
+            <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
           </Route>
+
           <Route path ='/login'>
             <Login />
           </Route>
+
         </StyledLowerTopDiv>
 
       </StyledTopDiv>
-    <Route exact path='/'>
-
-      <StyledCardsDiv>
-        <div className='cardsHeading'>
-          <h1>Popular How To's!</h1>
-          <form>
-            <input type="text" placeholder="Search.."/>
-          </form>
-          <form>
-          <select>
-            <option>Select a Category</option>
-            <option>Home and Living</option>
-            <option>Business</option>
-            <option>Health</option>
-            <option>Educational</option>
-          </select>
-          </form>
+      
+        <Route exact path='/'>
+          <StyledCardsDiv>
+            <div className='cardsHeading'>
+              <h1>Popular How To's!</h1>
+              <SearchBar
+                cards={howToCards}
+                setCards={setHowToCards}
+              />
+            <form>
+              <select>
+                <option>Select a Category</option>
+                <option>Home and Living</option>
+                <option>Business</option>
+                <option>Health</option>
+                <option>Educational</option>
+              </select>
+            </form>
         </div>
+
           {howToCards.map(card=>{
             return(
             <HowToCard key={card.id} card={card}/>
             )
           })}
-      </StyledCardsDiv>
-    </Route>
-    </StyledBody>
 
+        </StyledCardsDiv>
+      </Route>
+      
+    </StyledBody>
   );
 }
 
