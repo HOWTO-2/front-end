@@ -4,6 +4,10 @@ import * as yup from 'yup'
 import {Route} from 'react-router-dom'
 
 
+//REDUX IMPORTS//
+import { connect } from "react-redux"; 
+import { postUser, fetchHowto } from './Components/Store/actions/action'
+
 // COMPONENT IMPORTS
 import Header from './Components/Header'
 import HowToCard from './Components/HowToCard'
@@ -14,6 +18,8 @@ import SearchBar from './Components/SearchBar'
 import AddHowToForm from './Components/AddHowToForm'
 
 import styled, { keyframes } from 'styled-components'
+import EditHowToForm from './Components/EditHowToForm';
+
 
 
 const StyledCardsDiv = styled.div`
@@ -145,7 +151,7 @@ const initialHowtoCards = []
 const initialUsers = []
 
 
-function App() {
+function App(props) {
   /////////////////////////(╯°□°）╯︵ ┻━┻
   //SignUpStates//////////(╯°□°）╯︵ ┻━┻
   ////////////////////////(╯°□°）╯︵ ┻━┻
@@ -164,8 +170,6 @@ function App() {
   ////////////┬─┬ ノ( ゜-゜ノ)
   ////AXIOSREQUESTFUNCTIONS┬─┬ ノ( ゜-゜ノ)
   ////////////////////////////////////////┬─┬ ノ( ゜-゜ノ)
-
-
   const getCards = () => {
     axios.get('https://reqres.in/api/users?page=2')
       .then(res => {
@@ -238,8 +242,7 @@ function App() {
       password: signUpFormValues.password.trim(),
       email: signUpFormValues.email.trim(),
     }
-    postNewUser(newUser)
-    
+    props.postUser(newUser)
   }
 
   const submitCard = () => {
@@ -257,7 +260,7 @@ function App() {
   ////////////WHATEFFECT///////////////
   ///////////////////////////////////
   useEffect(() => {
-    getCards()
+    props.fetchHowto()
   }, [])
 
   useEffect(() => {
@@ -271,7 +274,8 @@ function App() {
       <Header />
 
       <StyledTopDiv>
-
+        
+        
         <StyledUpperTopDiv>
           <h1>
             "If you think you can do a thing or think that you can't, you're right." - Henry Ford
@@ -301,7 +305,11 @@ function App() {
           </Route>
 
           <Route exact path = '/'>
+<<<<<<< HEAD
             <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
+=======
+          <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
+>>>>>>> f2aa997df2b51b4f22cf1521b83aa8af659cf5c3
           </Route>
 
           <Route path ='/login'>
@@ -311,6 +319,7 @@ function App() {
         </StyledLowerTopDiv>
 
       </StyledTopDiv>
+<<<<<<< HEAD
       
         <Route exact path='/'>
           <StyledCardsDiv>
@@ -336,6 +345,41 @@ function App() {
             <HowToCard key={card.id} card={card}/>
             )
           })}
+=======
+    <Route exact path='/'>
+      <StyledCardsDiv>
+        
+        <div className='cardsHeading'>
+          <h1>Popular How To's!</h1>
+          <form>
+            <input type="text" placeholder="Search.."/>
+          </form>
+          <form>
+          <select>
+            <option>Select a Category</option>
+            <option>Home and Living</option>
+            <option>Business</option>
+            <option>Health</option>
+            <option>Educational</option>
+          </select>
+          </form>
+        </div>
+        {props.isLoading && <h2>LOADING...</h2>}
+        {props.error && (<p>ERROR {this.props.error}</p>)}
+
+        {props.howto.length > 0 &&(
+          props.howto[0].map(card=>{
+            return(
+            <HowToCard key={card.id} card={card}/>
+            )
+          })
+        )}
+
+      </StyledCardsDiv>
+    </Route>
+
+    </StyledBody>
+>>>>>>> f2aa997df2b51b4f22cf1521b83aa8af659cf5c3
 
         </StyledCardsDiv>
       </Route>
@@ -343,5 +387,12 @@ function App() {
     </StyledBody>
   );
 }
-
-export default App;
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    howto: state.howto,
+    isloading: state.isloading,
+    error: state.error
+  };
+};
+export default connect(mapStateToProps,{postUser, fetchHowto})(App);
