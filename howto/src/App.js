@@ -265,7 +265,7 @@ function App(props) {
 
   useEffect(() => {
     formSchema.isValid(signUpFormValues).then(valid => {
-      setDisabled(!valid)
+      setDisabled(valid)
     })
   }, [signUpFormValues])
 
@@ -305,11 +305,7 @@ function App(props) {
           </Route>
 
           <Route exact path = '/'>
-<<<<<<< HEAD
-            <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
-=======
           <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
->>>>>>> f2aa997df2b51b4f22cf1521b83aa8af659cf5c3
           </Route>
 
           <Route path ='/login'>
@@ -319,33 +315,6 @@ function App(props) {
         </StyledLowerTopDiv>
 
       </StyledTopDiv>
-<<<<<<< HEAD
-      
-        <Route exact path='/'>
-          <StyledCardsDiv>
-            <div className='cardsHeading'>
-              <h1>Popular How To's!</h1>
-              <SearchBar
-                cards={howToCards}
-                setCards={setHowToCards}
-              />
-            <form>
-              <select>
-                <option>Select a Category</option>
-                <option>Home and Living</option>
-                <option>Business</option>
-                <option>Health</option>
-                <option>Educational</option>
-              </select>
-            </form>
-        </div>
-
-          {howToCards.map(card=>{
-            return(
-            <HowToCard key={card.id} card={card}/>
-            )
-          })}
-=======
     <Route exact path='/'>
       <StyledCardsDiv>
         
@@ -378,12 +347,6 @@ function App(props) {
       </StyledCardsDiv>
     </Route>
 
-    </StyledBody>
->>>>>>> f2aa997df2b51b4f22cf1521b83aa8af659cf5c3
-
-        </StyledCardsDiv>
-      </Route>
-      
     </StyledBody>
   );
 }
