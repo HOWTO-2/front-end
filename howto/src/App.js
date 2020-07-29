@@ -16,6 +16,7 @@ import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
 
 import styled, { keyframes } from 'styled-components'
+import EditHowToForm from './Components/EditHowToForm';
 
 
 const StyledCardsDiv = styled.div`
@@ -275,7 +276,8 @@ function App(props) {
       <Header />
 
       <StyledTopDiv>
-
+        
+        
         <StyledUpperTopDiv>
           <h1>
             "If you think you can do a thing or think that you can't, you're right." - Henry Ford
@@ -306,6 +308,7 @@ function App(props) {
       </StyledTopDiv>
     <Route exact path='/'>
       <StyledCardsDiv>
+        
         <div className='cardsHeading'>
           <h1>Popular How To's!</h1>
           <form>
