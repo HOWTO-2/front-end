@@ -38,10 +38,23 @@ width: 18%;
 
 const StyledHowTo = styled.div`
 display: flex;
+align-items: center;
 justify-content: space-evenly;
 width: 15%;
 font-size: 1rem;
 color: purple;
+.navlink{
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 6px 5px;
+    border-radius: 13px;
+    color: purple;
+    &:hover{
+        color: white;
+    }
+}
 `
 
 
@@ -67,9 +80,12 @@ export default function Header(props){
                     {'|'}
                 <Link to='/login' className='navlink' id='loginlink'>Log In</Link>                        
             </StyledNav>
+
             <StyledHowTo>
                 <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
                 <h3>How To</h3>
+                {'|'}
+                <Link to='/user/create' className='navlink'>Create</Link>
             </StyledHowTo>
         </StyledHeader>
 
