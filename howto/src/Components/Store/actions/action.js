@@ -17,7 +17,7 @@ export const UPDATE_HOWTO_FAIL = "UPDATE_HOWTO_FAIL";
 export const postUser = (userInput) => {
   return dispatch => {
     axios.post('https://reqres.in/api/users', userInput)
-    .then(res=>{
+    .then(res=>{console.log(res)
         dispatch({ type: POST_USER, payload: res.data} );
 })
     .catch(err=>{console.log('ERROR', err)})
