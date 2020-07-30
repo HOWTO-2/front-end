@@ -76,8 +76,13 @@ export default function HowToCard({ card }) {
             <p className='cardText'>Topic: {card.email}</p>
             <p className='cardText'>Guide: {card.avatar}</p>
             <div className='cardEdit'>
+<<<<<<< HEAD
                 <Link to={`/user/edit/${card.id}`}className='editLink'>Edit</Link>
                 <button >Delete</button>
+=======
+                <Link to={`/user/edit/${card.id}`} className='editLink'>Edit</Link>
+                <button>Delete</button>
+>>>>>>> f77ba59049e4dc0eb1c9152e5527ca98ba2377dc
             </div>
             </div>
         </StyledCard>

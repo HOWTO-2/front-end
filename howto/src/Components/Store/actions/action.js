@@ -29,7 +29,7 @@ export const fetchHowto = () => {
       dispatch({ type: FETCH_HOWTO_START} );
 
       axios.get('https://reqres.in/api/users?page=2')
-      .then(res=>{console.log(res)
+      .then(res=>{console.log(res.data.data)
           dispatch({ type: FETCH_HOWTO_SUCCESS, payload: res.data.data} );
   })
       .catch(err=>{ dispatch({ type: FETCH_HOWTO_FAIL, payload: err} );
@@ -58,8 +58,7 @@ export const fetchHowto = () => {
       console.log(state)
       axios.put(`https://reqres.in/api/users/${state.id}`, state)
       .then(res=>{console.log(res)
-          dispatch({ type: UPDATE_HOWTO_SUCCESS, payload: res.data} 
-            );
+          dispatch({ type: UPDATE_HOWTO_SUCCESS, payload: res.data} );
   })
       .catch(err=>{ dispatch({ type: UPDATE_HOWTO_FAIL, payload: err} );
     })

@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 import styled, {keyframes} from 'styled-components'
 
 const StyledForm = styled.form`
@@ -54,6 +56,16 @@ padding: 3px;
 `
 
 
+// example provided on reqres.in website
+// MUST USE EXAMPLE USERS TO REGISTER AND LOGIN!
+//
+// "email": "eve.holt@reqres.in",
+// "password": "pistol"
+//
+// RESPONSE BELOW
+//
+// "id": 4
+// "token": "QpwL5tke4Pnpja7X4"
 
 
 export default function Signup(props) {
@@ -65,78 +77,63 @@ export default function Signup(props) {
     //Helper Functions//┬─┬ ノ( ゜-゜ノ)
     ///////////////////////////////////
 
-    const onInputChange = e => {
-        const { name, value } = e.target
-        inputChange(name, value)
+    let initialState = {    
+      email: "",
+      password: ""
     }
-
-    const onSubmit = e => {
-        e.preventDefault()
-        submit()
+  
+    const [ newUser, setNewUser ] = useState(initialState)
+    const { push } = useHistory();
+  
+    const handleChange = e => {
+      setNewUser({
+          ...newUser,
+          [e.target.name]: e.target.value
+      })
     }
+  
+    const addUser = e => {
+      e.preventDefault();
+      axios
+      .post("https://reqres.in/api/register", newUser)
+      .then(res => {
+          console.log('registry successful', res.data)
+          push('/login')
+      })
+      .catch(err => console.log({ err }))
+    } 
 
 
     return (
         <StyledForm
-            onSubmit={onSubmit}
+            onSubmit={addUser}
             >
             <div>{errors.email}</div>
             <div>{errors.password}</div>
             <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
             <StyledText>Sign up and create posts!</StyledText>
 
-            <StyledLabel>First Name
-                <StyledInput
-                        name='fName'
-                        type='text'
-                        maxLength='15'
-                        onChange={onInputChange}
-                        value={values.fName}
-                        />
-            </StyledLabel>
-
-            <StyledLabel>Last Name
-        <StyledInput
-                    name='lName'
-                    type='text'
-                    maxLength='15'
-                    onChange={onInputChange}
-                    value={values.lName}
-                    />
-            </StyledLabel>
-
             <StyledLabel>Email
                 <StyledInput
                     name='email'
-                    type='email'
-                    maxLength='25'
-                    onChange={onInputChange}
-                    value={values.email}
-                    />
-            </StyledLabel>
-
-            <StyledLabel>Username
-                <StyledInput
-                    name='username'
                     type='text'
-                    maxLength='15'
-                    onChange={onInputChange}
-                    value={values.username}
+                    maxLength='25'
+                    onChange={handleChange}
+                    value={newUser.email}
                     />
             </StyledLabel>
 
             <StyledLabel>Password
                 <StyledInput
                     name='password'
-                    type='password'
+                    type='text'
                     maxLength='15'
-                    minLength='7'
-                    onChange={onInputChange}
-                    value={values.password}
+                    onChange={handleChange}
+                    value={newUser.password}
                     />
             </StyledLabel>
             <br></br>
-            <StyledButton disabled={disabled}> Sign Up </StyledButton>
+            <StyledButton > Sign Up </StyledButton>
 
         </StyledForm >
     )
