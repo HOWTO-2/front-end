@@ -16,9 +16,10 @@ import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
 import SearchBar from './Components/SearchBar'
 import AddHowToForm from './Components/AddHowToForm'
+import EditHowToForm from './Components/EditHowToForm'
 
 import styled, { keyframes } from 'styled-components'
-import EditHowToForm from './Components/EditHowToForm';
+
 
 
 
@@ -284,6 +285,15 @@ function App(props) {
 
         <StyledLowerTopDiv>
 
+          <Route path='/user/edit'>
+            <EditHowToForm
+              inputChange={inputChange}
+              submit={submitCard}
+              disabled={disabled}
+              errors={formErrors}
+            />
+          </Route>
+
           <Route path='/user/create'>  
           {/* A workable link is commented out inside the Header Component */}
             <AddHowToForm
@@ -320,8 +330,9 @@ function App(props) {
         
         <div className='cardsHeading'>
           <h1>Popular How To's!</h1>
+          
           <form>
-            <input type="text" placeholder="Search.."/>
+            <SearchBar/>
           </form>
           <form>
           <select>
@@ -348,6 +359,8 @@ function App(props) {
     </Route>
 
     </StyledBody>
+
+  
   );
 }
 const mapStateToProps = state => {
