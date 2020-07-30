@@ -63,7 +63,6 @@ export default function HowToCard({ card }) {
     if (!card) {
         return <h2>Finding Cards</h2>
     }
-
     return (
         //////////sample PLEASE CHANGE VALUES WHEN ENDPOINT UPDATED////////
         <StyledCard>
@@ -75,7 +74,8 @@ export default function HowToCard({ card }) {
             <p className='cardText'>Topic: {card.email}</p>
             <p className='cardText'>Guide: {card.avatar}</p>
             <div className='cardEdit'>
-                <Link to='/user/edit' className='editLink'>Edit</Link>
+                <Link to={`/user/edit/${card.id}`} className='editLink'>Edit</Link>
+                <button>Delete</button>
             </div>
             </div>
         </StyledCard>
