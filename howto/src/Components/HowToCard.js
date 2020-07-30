@@ -67,11 +67,7 @@ function HowToCard({ card },props) {
     if (!card) {
         return <h2>Finding Cards</h2>
     }
-    const onSubmitDelete = e =>{
-        console.log('test',e)
-        e.preventDefault()
-        props.deleteHowto(card)
-    }
+
     return (
         //////////sample PLEASE CHANGE VALUES WHEN ENDPOINT UPDATED////////
         <StyledCard>
@@ -84,7 +80,6 @@ function HowToCard({ card },props) {
             <p className='cardText'>Guide: {card.avatar}</p>
             <div className='cardEdit'>
                 <Link to={`/user/edit/${card.id}`} className='editLink'>Edit</Link>
-                <button onClick={onSubmitDelete}>Delete</button>
             </div>
             </div>
         </StyledCard>

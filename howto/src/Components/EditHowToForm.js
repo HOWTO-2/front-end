@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { updateHowto, deleteHowto, fetchHowto } from './Store/actions/action'
+import { updateHowto, deleteHowto} from './Store/actions/action'
 import { connect } from "react-redux"; 
 
 const StyledAddForm = styled.form`
@@ -68,7 +68,7 @@ function EditHowToForm(props){
         fetchHowToTwo(params.id);
     }, [params.id])
     
-    const { inputChange, submit, disabled, errors } = props
+    const {disabled, errors } = props
 
     const onInputChange = e =>{ 
         e.persist();
@@ -82,7 +82,7 @@ function EditHowToForm(props){
         props.updateHowto(thisUser)
     }
 
-    const onSubmitDelete = e =>{
+    const handleDelete = e =>{
         //console.log(thisUser)
         e.preventDefault()
         props.deleteHowto()
@@ -130,7 +130,7 @@ function EditHowToForm(props){
             <br></br>
             <button disabled={disabled}> Confirm Changes </button>
         </StyledAddForm>
-        <button onClick={onSubmitDelete}>delete</button>
+        <button onClick={handleDelete}>delete</button>
         </>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import {postHowto} from './Store/actions/action'
+import { postHowto } from './Store/actions/action'
 
 const StyledAddForm = styled.form`
 display: flex;
