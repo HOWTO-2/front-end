@@ -28,7 +28,7 @@ export const fetchHowto = () => {
     return dispatch => {
       dispatch({ type: FETCH_HOWTO_START} );
 
-      axios.get('https://reqres.in/api/users?page=2')
+      axios.get('https://reqres.in/api/users')
       .then(res=>{console.log(res.data.data)
           dispatch({ type: FETCH_HOWTO_SUCCESS, payload: res.data.data} );
   })
@@ -41,8 +41,8 @@ export const fetchHowto = () => {
     return dispatch => {
       dispatch({ type: DELETE_HOWTO_START} );
 
-      axios.delete(`https://reqres.in/api/users/${state.id}`)
-      .then(res=>{console.log(res)
+      axios.delete(`https://reqres.in/api/users/2`)
+      .then(res=>{console.log('INSIDE DELETE FUNCTION', res)
           dispatch({ type: DELETE_HOWTO_SUCCESS} );
   })
       .catch(err=>{ dispatch({ type: DELETE_HOWTO_FAIL, payload: err} );
