@@ -3,6 +3,8 @@ import styled from 'styled-components'
 // import axios from 'axios'
 import formSchemaCard from './Validation/FormSchemaCard'
 
+import media from '../Media'
+
 import Logo from './Logo'
 
 const StyledAddForm = styled.form`
@@ -15,14 +17,14 @@ padding: 16px;
 color: white;
 font-size: 1.3rem;
 text-align: center;
-background: url('https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2030&q=80');
+background: black;
 border-radius: 20% 20%;
 h2{
    
 }
 input {
     display: flex;
-    color: white;
+    color: lightblue;
     font-size: 2rem;
     background: black;
     border-radius: 10px;
@@ -35,7 +37,7 @@ input {
 
 button{
     color: white;
-    background: violet;
+    background: green;
     width: 40%;
     padding: 5px;
     border-radius: 15px;
@@ -44,6 +46,15 @@ button{
         background: gold;
     }
 }
+${media.large`
+    width: 42%;
+    padding: 100px;
+    background: url('https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2030&q=80');
+    button{
+        background: violet;
+    }
+`}
+
 `
 
 export default function EditHowToForm(props){

@@ -6,8 +6,8 @@ background: red;
 color: black;
 font-size: 5rem;
 width: 75%;
-padding: 80px;
-margin: 11%;
+padding: 88px;
+margin: 7%;
 border: 1px solid red;
 border-radius: 20px;
 &:hover{

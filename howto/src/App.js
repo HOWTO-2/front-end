@@ -19,6 +19,8 @@ import SearchBar from './Components/SearchBar'
 import Dropdown from './Components/Dropdown'
 import Delete from './Components/Delete'
 
+import media from './Media'
+
 import styled, { keyframes } from 'styled-components'
 
 const StyledBody = styled.div`
@@ -40,7 +42,13 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
+${media.large`
+  background: url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2030&q=80')
+
+  `}
+
 `
+
 const StyledUpperTopDiv = styled.div`
 display: flex;
 flex-direction: column;
@@ -51,6 +59,12 @@ font-size: 1.5rem;
 color: black;
 font-family: garamond;
 width: 40%;
+${media.large`
+  width: 80%;
+  text-align: center;
+  font-size: 1.3rem;
+`}
+
 `
 
 const StyledLowerTopDiv = styled.div`
@@ -70,6 +84,7 @@ const kfLogo = keyframes`
    border: 1px solid teal;
 }
 `
+
 const StyledLogo = styled.img`
 width: 20%;
 border: 1px dotted gray;
@@ -80,6 +95,12 @@ background: none;
 padding: 5px;
 box-shadow: 0px 0px 80px 1px;
 animation: ${kfLogo} 1.3s ease-in-out forwards;
+${media.large`
+  box-shadow: 0px 0px 100px 1px;
+  background: aqua;
+  animation: none;
+`}
+
 `
 
 const StyledCardsDiv = styled.div`

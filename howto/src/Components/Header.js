@@ -2,6 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
+import media from '../Media'
+
 const StyledHeader = styled.header`
 background: black;
 color: white;
@@ -9,6 +11,11 @@ padding: 4px;
 display: flex;
 flex-direction: row-reverse;
 justify-content: space-between;
+${media.medium`
+    flex-direction: column-reverse;
+    align-items: center;
+`}
+
 `
 
 const StyledNav = styled.nav`
@@ -34,6 +41,11 @@ width: 18%;
         background: teal;
     }
 }
+${media.large`
+    width: 70%;
+    
+    `}
+
 `
 
 const StyledHowTo = styled.div`
@@ -55,6 +67,14 @@ color: purple;
         color: white;
     }
 }
+${media.large`
+    width: 20%;
+`}
+${media.medium`
+    width: 33%;
+    
+`}
+
 `
 
 
