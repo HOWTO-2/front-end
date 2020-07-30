@@ -10,9 +10,9 @@
   
   const initialState = {
     user: [],
-    howto:[],
+    howto: [[]],
     isloading : false,
-    error: ''       
+    error: '',      
   };
   
   
@@ -32,7 +32,7 @@
         return {
           ...state,
           isloading: false,
-          howto: [...state.howto, action.payload]
+          howto: [...state.howto[0], action.payload]
         };
       case FETCH_HOWTO_FAIL:  
         return {
@@ -45,11 +45,12 @@
         ...state,
         isloading: true
       };
-      case UPDATE_HOWTO_SUCCESS:  
+      case UPDATE_HOWTO_SUCCESS:
+        console.log(state.howto[0])  
         return {
           ...state,
           isloading: false,
-          howto: [...state.howto, action.payload]
+          howto: [[...state.howto[0].filter(v => v.id !== action.payload.id), action.payload]]
         };
       case UPDATE_HOWTO_FAIL:  
         return {
