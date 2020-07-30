@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
+
 const StyledHeader = styled.header`
 background: black;
 color: white;
@@ -85,7 +86,7 @@ export default function Header(props){
                 <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
                 <h3>How To</h3>
                 {'|'}
-                <Link to='/user/create' className='navlink'>Create</Link>
+                {/* <Link to='/user/create/protected' className='navlink'>Create</Link> */}
             </StyledHowTo>
         </StyledHeader>
 

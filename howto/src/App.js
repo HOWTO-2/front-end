@@ -17,6 +17,7 @@ import Login from './Components/Login'
 import SearchBar from './Components/SearchBar'
 import AddHowToForm from './Components/AddHowToForm'
 import EditHowToForm from './Components/EditHowToForm'
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute'
 
 import styled, { keyframes } from 'styled-components'
 
@@ -294,7 +295,7 @@ function App(props) {
             />
           </Route>
 
-          <Route path='/user/create'>  
+          <PrivateRoute path='/user/create/protected'>  
           {/* A workable link is commented out inside the Header Component */}
             <AddHowToForm
               inputChange={inputChange}
@@ -302,7 +303,7 @@ function App(props) {
               disabled={disabled}
               errors={formErrors}
             />
-          </Route>
+          </PrivateRoute>
 
           <Route path='/signup'>
             <Signup
