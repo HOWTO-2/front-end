@@ -16,9 +16,10 @@ import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
 import SearchBar from './Components/SearchBar'
 import AddHowToForm from './Components/AddHowToForm'
+import EditHowToForm from './Components/EditHowToForm'
 
 import styled, { keyframes } from 'styled-components'
-import EditHowToForm from './Components/EditHowToForm';
+
 
 
 
@@ -170,15 +171,6 @@ function App(props) {
   ////////////┬─┬ ノ( ゜-゜ノ)
   ////AXIOSREQUESTFUNCTIONS┬─┬ ノ( ゜-゜ノ)
   ////////////////////////////////////////┬─┬ ノ( ゜-゜ノ)
-  const getCards = () => {
-    axios.get('https://reqres.in/api/users?page=2')
-      .then(res => {
-        setHowToCards(res.data.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
 
   const postNewCard = newCard => {
     axios.post('https://reqres.in/api/users', newCard)
@@ -191,16 +183,6 @@ function App(props) {
       })
   }
 
-  const postNewUser = newUser => {
-    axios.post('https://reqres.in/api/users', newUser)
-      .then(res => {
-        setUser([res.data, ...users])
-        setSignUpFormValues(initialSignupValue)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
   ////////////////////////////////////////////////
   ////////////AXIOS ENDS HERE/////////////////////
   ///////////////////////////////////////////////
@@ -213,12 +195,12 @@ function App(props) {
 
       .validate(value)
 
-      .then(valid => {
+      .then(
         setFormErrors({
           ...formErrors,
           [name]: "",
         })
-      })
+      )
 
       .catch(err => {
         setFormErrors({
@@ -264,7 +246,9 @@ function App(props) {
   }, [])
 
   useEffect(() => {
+    console.log(signUpFormValues)
     formSchema.isValid(signUpFormValues).then(valid => {
+      console.log(valid)
       setDisabled(valid)
     })
   }, [signUpFormValues])
@@ -283,6 +267,15 @@ function App(props) {
         </StyledUpperTopDiv>
 
         <StyledLowerTopDiv>
+
+          <Route path='/user/edit'>
+            <EditHowToForm
+              inputChange={inputChange}
+              submit={submitCard}
+              disabled={disabled}
+              errors={formErrors}
+            />
+          </Route>
 
           <Route path='/user/create'>  
           {/* A workable link is commented out inside the Header Component */}
@@ -305,7 +298,7 @@ function App(props) {
           </Route>
 
           <Route exact path = '/'>
-            <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
+          <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png'></StyledLogo>
           </Route>
 
           <Route path ='/login'>
@@ -320,8 +313,9 @@ function App(props) {
         
         <div className='cardsHeading'>
           <h1>Popular How To's!</h1>
+          
           <form>
-            <input type="text" placeholder="Search.."/>
+            <SearchBar/>
           </form>
           <form>
           <select>
@@ -349,10 +343,10 @@ function App(props) {
 
     </StyledBody>
 
+  
   );
 }
 const mapStateToProps = state => {
-  console.log(state)
   return {
     howto: state.howto,
     isloading: state.isloading,

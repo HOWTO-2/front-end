@@ -78,7 +78,7 @@ export default function AddHowToForm(props){
                 />
             </label>
             
-            <label>This post explains how to...
+            <label>Topic
                 <input
                     name='topic'
                     type='text'

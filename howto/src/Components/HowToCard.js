@@ -1,5 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import { Link } from 'react-router-dom'
+
+const kfCard = keyframes`
+100%{
+    box-shadow: 0px 3px 30px 1px; 
+}
+`
 
 const StyledCard = styled.div`
 display: flex;
@@ -33,10 +40,24 @@ img {
     color: white;
 }
 &:hover{
-    color: black;
-    box-shadow: 0px 0px 15px 1px;
+    color: violet;
+    animation: ${kfCard} 0.5s ease-in-out forwards;
+    cursor: pointer;
+}
+.cardEdit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1px;
+    .editLink{
+        color: purple;
+        &:hover{
+            color: violet;
+        }
+    }
 }
 `
+
 
 export default function HowToCard({ card }) {
     if (!card) {
@@ -48,11 +69,14 @@ export default function HowToCard({ card }) {
         <StyledCard>
             <h2>Title</h2>
             <img src='https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2014&q=80'/>
+            
             <div className='cardbottomdiv'>
-
             <p className='cardText'>Author: {card.first_name}{card.last_name}</p>
             <p className='cardText'>Topic: {card.email}</p>
             <p className='cardText'>Guide: {card.avatar}</p>
+            <div className='cardEdit'>
+                <Link to='/user/edit' className='editLink'>Edit</Link>
+            </div>
             </div>
         </StyledCard>
     )
