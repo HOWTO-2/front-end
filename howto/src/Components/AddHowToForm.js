@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import {postHowto} from './Store/actions/action'
 
 const StyledAddForm = styled.form`
 display: flex;
@@ -38,18 +40,35 @@ button{
     border-radius: 15px;
 }
 `
+const initialState = {
+    first_name: '',
+    last_name: '',
+    email: ''
+}
 
-export default function AddHowToForm(props){
+function AddHowToForm(props){
     const { inputChange, submit, disabled, errors } = props
+    const [state, setState] = useState(initialState)
 
+    // const onInputChange = e =>{ 
+    //     const { name, value } = e.target
+    //     inputChange(name, value)
+    // }
     const onInputChange = e =>{ 
-        const { name, value } = e.target
-        inputChange(name, value)
+        e.persist();
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        });
     }
-
     const onSubmit = e =>{
         e.preventDefault()
-        submit()
+        const newUser = {
+            first_name: state.first_name,
+            last_name: state.last_name,
+            email: state.email
+        }
+        props.postHowto(newUser)
     }
 
     return(
@@ -64,25 +83,28 @@ export default function AddHowToForm(props){
             <h2>Create a How To</h2>
             <label>Title of your How To
                 <input
-                    name='title'
+                    name='first_name'
                     type='text'
                     onChange={onInputChange}
+                    value={state.first_name}
                     />
             </label>
 
             <label>Your name
                 <input
-                    name='author'
+                    name='last_name'
                     type='text'
                     onChange={onInputChange}
+                    value={state.last_name}
                 />
             </label>
             
             <label>Topic
                 <input
-                    name='topic'
+                    name='email'
                     type='text'
                     onChange={onInputChange}
+                    value={state.email}
                 />
             </label>
 
@@ -99,3 +121,11 @@ export default function AddHowToForm(props){
         </StyledAddForm>
     )
 }
+const mapStateToProps = state => {
+    return {
+      howto: state.howto,
+      isloading: state.isloading,
+      error: state.error
+    };
+  };
+export default connect(mapStateToProps,{postHowto})(AddHowToForm)

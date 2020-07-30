@@ -1,5 +1,6 @@
     import {
       POST_USER, 
+      POST_HOWTO,
       FETCH_HOWTO_FAIL,
       FETCH_HOWTO_START,
       FETCH_HOWTO_SUCCESS,
@@ -22,6 +23,11 @@
         return {
           ...state,
           user: [...state.user, action.payload]
+        };
+      case POST_HOWTO:
+        return {
+          ...state,
+          howto: [[...state.howto[0], action.payload]]
         };
       case FETCH_HOWTO_START:  
           return {
