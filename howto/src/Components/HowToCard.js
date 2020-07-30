@@ -46,11 +46,13 @@ img {
 }
 .cardEdit{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 1px;
-    .editLink{
+    color: purple;
+    .cardLink{
         color: purple;
+        padding: 10px;
         &:hover{
             color: violet;
         }
@@ -75,7 +77,9 @@ export default function HowToCard({ card }) {
             <p className='cardText'>Topic: {card.email}</p>
             <p className='cardText'>Guide: {card.avatar}</p>
             <div className='cardEdit'>
-                <Link to='/user/edit' className='editLink'>Edit</Link>
+                <Link to='/user/edit' className='cardLink'>Edit</Link>
+                {'|'}
+                <Link to='/user/delete' className='cardLink'>Delete</Link>
             </div>
             </div>
         </StyledCard>

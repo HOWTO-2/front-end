@@ -17,6 +17,7 @@ import AddHowToForm from './Components/AddHowToForm'
 import EditHowToForm from './Components/EditHowToForm'
 import SearchBar from './Components/SearchBar'
 import Dropdown from './Components/Dropdown'
+import Delete from './Components/Delete'
 
 import styled, { keyframes } from 'styled-components'
 
@@ -277,6 +278,10 @@ function App(props) {
         </StyledUpperTopDiv>
 
         <StyledLowerTopDiv>
+
+          <Route path='/user/delete'>
+            <Delete />
+          </Route>
 
           <Route path='/user/edit'>
             <EditHowToForm
