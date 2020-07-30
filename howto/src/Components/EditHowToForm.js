@@ -83,10 +83,10 @@ function EditHowToForm(props){
     }
 
     const handleDelete = e =>{
+        //console.log(props.howto)
         //console.log(thisUser)
         e.preventDefault()
         props.deleteHowto()
-        //console.log(props.howto)
     }
 
     return(
