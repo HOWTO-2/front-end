@@ -12,52 +12,14 @@ import { postUser, fetchHowto } from './Components/Store/actions/action'
 import Header from './Components/Header'
 import HowToCard from './Components/HowToCard'
 import Signup from './Components/Signup'
-import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
-import SearchBar from './Components/SearchBar'
 import AddHowToForm from './Components/AddHowToForm'
 import EditHowToForm from './Components/EditHowToForm'
+import SearchBar from './Components/SearchBar'
+import Dropdown from './Components/Dropdown'
+import Delete from './Components/Delete'
 
 import styled, { keyframes } from 'styled-components'
-
-
-
-
-const StyledCardsDiv = styled.div`
-display:flex;
-flex-direction: column;
-align-items: center;
-.cardsHeading{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  background: black;
-  width: 100%;
-  h1{
-    padding: 5px 15px;
-    font-size: 1.5rem;
-  }
-  form{
-    select{
-      color: white;
-      font-size: 1.3rem;
-      background: black;
-      border: 0px solid silver;
-      option{
-        font-size: 2rem;
-      }
-    }
-  }
-  h3{
-    padding: 5px;
-    font-size: 1rem;
-  }
-}
-h2{
-  font-size: 2rem;
-}
-`
 
 const StyledBody = styled.div`
 background: url(
@@ -99,6 +61,9 @@ padding: 2%;
 width: 95%;
 `
 const kfLogo = keyframes`
+25%{
+  border: 1px dotted gray;
+}
 100%{
    background teal;
    color: black;
@@ -107,7 +72,7 @@ const kfLogo = keyframes`
 `
 const StyledLogo = styled.img`
 width: 20%;
-border: 1px solid gray;
+border: 1px dotted gray;
 border-radius: 50% 50%;
 margin: 150px 0px 32px 0px;
 color: white;
@@ -115,6 +80,31 @@ background: none;
 padding: 5px;
 box-shadow: 0px 0px 80px 1px;
 animation: ${kfLogo} 1.3s ease-in-out forwards;
+`
+
+const StyledCardsDiv = styled.div`
+display:flex;
+flex-direction: column;
+align-items: center;
+.cardsHeading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background: black;
+  width: 100%;
+  h1{
+    padding: 5px 15px;
+    font-size: 1.5rem;
+  }
+  h3{
+    padding: 5px;
+    font-size: 1rem;
+  }
+}
+h2{
+  font-size: 2rem;
+}
 `
 
 
@@ -136,7 +126,8 @@ const initialLogIn = {
 }
 
 const initialHowToForm = {
-  username: '',
+  title: '',
+  author: '',
   topic: '',
   steps: '',
 }
@@ -160,6 +151,7 @@ function App(props) {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
   const [users, setUser] = useState(initialUsers)
+  const [login, setLogin] = useState(initialLogIn)
 
   ///////////////////////////////
   //HowToCardStates(╯°□°）╯︵ ┻━┻
@@ -189,6 +181,7 @@ function App(props) {
       })
       .catch(err => {
         console.log(err)
+        debugger
       })
   }
 
@@ -200,6 +193,7 @@ function App(props) {
       })
       .catch(err => {
         console.log(err)
+        debugger
       })
   }
   ////////////////////////////////////////////////
@@ -208,9 +202,9 @@ function App(props) {
 
   //////////////FORM HELPER FUNCTIONS START HERE//////
   ///////////////////////////////////////////////////
-  const inputChange = (name, value) => {
+  const inputChange = (name, value, values, setValues, schema) => {
     yup
-      .reach(formSchema, name)
+      .reach(schema, name)
 
       .validate(value)
 
@@ -228,8 +222,8 @@ function App(props) {
         })
       })
 
-    setSignUpFormValues({
-      ...signUpFormValues,
+    setValues({
+      ...values,
       [name]: value
     })
   }
@@ -243,7 +237,7 @@ function App(props) {
       password: signUpFormValues.password.trim(),
       email: signUpFormValues.email.trim(),
     }
-    props.postUser(newUser)
+    postNewUser(newUser)
   }
 
   const submitCard = () => {
@@ -264,11 +258,11 @@ function App(props) {
     props.fetchHowto()
   }, [])
 
-  useEffect(() => {
-    formSchema.isValid(signUpFormValues).then(valid => {
-      setDisabled(!valid)
-    })
-  }, [signUpFormValues])
+  // useEffect(() => {
+  //   formSchemaLogin.isValid(login).then(valid => {
+  //     setDisabled(!valid)
+  //   })
+  // }, [login])
 
   return (
     <StyledBody>
@@ -285,21 +279,34 @@ function App(props) {
 
         <StyledLowerTopDiv>
 
+          <Route path='/user/delete'>
+            <Delete />
+          </Route>
+
           <Route path='/user/edit'>
             <EditHowToForm
+              values={howToFormValues}
+              setValues={setHowToFormValues}
               inputChange={inputChange}
               submit={submitCard}
               disabled={disabled}
               errors={formErrors}
+              cards={howToCards}
+              setCards={setHowToCards}
+              initial={initialHowToForm}
+              setDisabled={setDisabled}
             />
           </Route>
 
           <Route path='/user/create'>  
-          {/* A workable link is commented out inside the Header Component */}
+          
             <AddHowToForm
+              values={howToFormValues}
+              setValues={setHowToFormValues}
               inputChange={inputChange}
               submit={submitCard}
               disabled={disabled}
+              setDisabled={setDisabled}
               errors={formErrors}
             />
           </Route>
@@ -307,9 +314,11 @@ function App(props) {
           <Route path='/signup'>
             <Signup
               values={signUpFormValues}
+              setValues={setSignUpFormValues}
               inputChange={inputChange}        
               submit={submitUser}
               disabled={disabled}
+              setDisabled={setDisabled}
               errors={formErrors} 
               />
           </Route>
@@ -319,7 +328,15 @@ function App(props) {
           </Route>
 
           <Route path ='/login'>
-            <Login />
+            <Login
+              values={login}
+              setValues={setLogin}
+              inputChange={inputChange}
+              disabled={disabled}
+              setDisabled={setDisabled}
+              errors={formErrors}
+              initial={initialLogIn}
+            />
           </Route>
 
         </StyledLowerTopDiv>
@@ -332,17 +349,13 @@ function App(props) {
           <h1>Popular How To's!</h1>
           
           <form>
-            <SearchBar/>
+            <SearchBar
+              cards={howToCards}
+              setCards={setHowToCards}
+              getCards={getCards}
+            />
           </form>
-          <form>
-          <select>
-            <option>Select a Category</option>
-            <option>Home and Living</option>
-            <option>Business</option>
-            <option>Health</option>
-            <option>Educational</option>
-          </select>
-          </form>
+          <Dropdown />
         </div>
         {props.isLoading && <h2>LOADING...</h2>}
         {props.error && (<p>ERROR {this.props.error}</p>)}
