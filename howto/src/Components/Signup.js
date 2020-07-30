@@ -1,5 +1,6 @@
-import React from 'react'
-import styled, {keyframes} from 'styled-components'
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import formSchema from './Validation/FormSchema'
 
 const StyledForm = styled.form`
 display: flex;
@@ -43,6 +44,10 @@ background: green;
 width: 40%;
 padding: 5px;
 border-radius: 15px;
+&:hover{
+    background: gold;
+    cursor: pointer;
+}
 `
 
 const StyledLogo = styled.img`
@@ -58,8 +63,14 @@ padding: 3px;
 
 export default function Signup(props) {
 
-    const { values, inputChange, submit, disabled, errors } = props
-
+    const { 
+        values, 
+        setValues, 
+        inputChange, 
+        submit, 
+        disabled, 
+        setDisabled, 
+        errors } = props
 
     //////////////////┬─┬ ノ( ゜-゜ノ)
     //Helper Functions//┬─┬ ノ( ゜-゜ノ)
@@ -67,7 +78,7 @@ export default function Signup(props) {
 
     const onInputChange = e => {
         const { name, value } = e.target
-        inputChange(name, value)
+        inputChange(name, value, values, setValues, formSchema)
     }
 
     const onSubmit = e => {
@@ -75,15 +86,23 @@ export default function Signup(props) {
         submit()
     }
 
+    useEffect(() => {
+        formSchema.isValid(values).then(valid => {
+          setDisabled(!valid)
+        })
+      }, [values])
 
     return (
         <StyledForm
             onSubmit={onSubmit}
             >
+            <div>{errors.fName}</div>
+            <div>{errors.lName}</div>
             <div>{errors.email}</div>
+            <div>{errors.username}</div>
             <div>{errors.password}</div>
             <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
-            <StyledText>Sign up and create posts!</StyledText>
+            <StyledText>Wecome to How To!</StyledText>
 
             <StyledLabel>First Name
                 <StyledInput

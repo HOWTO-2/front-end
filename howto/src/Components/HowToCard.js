@@ -68,7 +68,7 @@ export default function HowToCard({ card }) {
         //////////sample PLEASE CHANGE VALUES WHEN ENDPOINT UPDATED////////
         <StyledCard>
             <h2>Title</h2>
-            <img src='https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2014&q=80'/>
+            <img src='https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2014&q=80' alt='Design for How To Guide'/>
             
             <div className='cardbottomdiv'>
             <p className='cardText'>Author: {card.first_name}{card.last_name}</p>
