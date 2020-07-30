@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import formSchema from './Validation/FormSchema'
-import Logo from './Logo'
-import media from '../Media'
 
 const StyledForm = styled.form`
 display: flex;
@@ -16,17 +14,6 @@ padding: 30px;
 margin: 1px;
 border-radius: 20% 20%;
 box-shadow: 0px 0px 80px 5px;
-${media.large`
-    background: url('https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2030&q=80');
-    width: 42%;
-    padding: 100px;
-    box-shadow: none;
-    button{
-        color: white;
-        background: violet;
-    }
-`}
-
 `
 
 const StyledText = styled.h2`
@@ -61,6 +48,14 @@ border-radius: 15px;
     background: gold;
     cursor: pointer;
 }
+`
+
+const StyledLogo = styled.img`
+width: 12%;
+border: 5px solid cyan;
+border-radius: 50% 50%;
+background: teal;
+padding: 3px;
 `
 
 
@@ -106,7 +101,7 @@ export default function Signup(props) {
             <div>{errors.email}</div>
             <div>{errors.username}</div>
             <div>{errors.password}</div>
-            <Logo />
+            <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' />
             <StyledText>Wecome to How To!</StyledText>
 
             <StyledLabel>First Name

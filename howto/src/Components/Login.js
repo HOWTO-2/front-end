@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import formSchemaLogin from'./Validation/FormSchemaLogin'
-import Logo from './Logo'
-import media from '../Media'
 
 const StyledForm = styled.form`
 display: flex;
@@ -12,7 +10,7 @@ align-items: center;
 background: black;
 color: white;
 width: 20%;
-text-align: center;
+
 padding: 30px;
 margin: 25px;
 border: 1px solid pink;
@@ -26,18 +24,6 @@ input{
 h2 {
     color: white;
 }
-${media.large`
-    background: url('https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2030&q=80');
-    width: 30%;
-    padding: 100px;
-    border: none;
-    box-shadow: none;
-    button{
-        color: white;
-        background: violet;
-    }
-`}
-
 `
 
 const StyledLabel = styled.label`
@@ -76,11 +62,6 @@ border: 5px solid cyan;
 border-radius: 50% 50%;
 background: teal;
 padding: 3px;
-${media.large`
-    background: violet;
-    width: 25%;
-`}
-
 `
 
 export default function Login(props) {
@@ -128,8 +109,8 @@ export default function Login(props) {
             <div>{errors.username}</div>
             <div>{errors.password}</div>
       
+            <StyledLogo src='http://www.pngmart.com/files/4/Satin-Transparent-Background.png' alt='butterfly' />
             <h2>Welcome Back!</h2>
-            <Logo />
             <StyledLabel>Username
                 <StyledInput
                     name='username'

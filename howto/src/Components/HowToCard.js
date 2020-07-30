@@ -2,8 +2,6 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import media from '../Media'
-
 const kfCard = keyframes`
 100%{
     box-shadow: 0px 3px 30px 1px; 
@@ -60,32 +58,6 @@ img {
         }
     }
 }
-${media.large`
-    width: 42%;
-    padding: 100px;
-    h2{
-        background: none;
-        border: none;
-    }
-    img{
-        
-    }
-    .cardbottomdiv{
-        border-radius: 10px;
-        width: 120%;
-    }
-`}
-${media.medium`
-    .cardbottomdiv{
-        width: 148%;
-    }
-`}
-${media.small`
-    .cardbottomdiv{
-        width: 200%;
-    }
-`}
-
 `
 
 
