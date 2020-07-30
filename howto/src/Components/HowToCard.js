@@ -1,6 +1,9 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useLocation, useParams, useHistory } from "react-router-dom";
+import { updateHowto, deleteHowto, fetchHowto } from './Store/actions/action'
+import { connect } from "react-redux"; 
 
 const kfCard = keyframes`
 100%{
@@ -59,10 +62,12 @@ img {
 `
 
 
-export default function HowToCard({ card }) {
+function HowToCard({ card },props) {
+    console.log('////////////', card.id)
     if (!card) {
         return <h2>Finding Cards</h2>
     }
+
     return (
         //////////sample PLEASE CHANGE VALUES WHEN ENDPOINT UPDATED////////
         <StyledCard>
@@ -75,9 +80,17 @@ export default function HowToCard({ card }) {
             <p className='cardText'>Guide: {card.avatar}</p>
             <div className='cardEdit'>
                 <Link to={`/user/edit/${card.id}`} className='editLink'>Edit</Link>
-                <button>Delete</button>
             </div>
             </div>
         </StyledCard>
     )
 }
+const mapStateToProps = state => {
+    console.log(state)
+    return {
+      howto: state.howto,
+      isloading: state.isloading,
+      error: state.error
+    };
+  };
+export default connect(mapStateToProps,{})(HowToCard)

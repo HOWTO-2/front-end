@@ -74,7 +74,7 @@ export default function Header(props){
         <StyledHeader>
             <StyledNav>
             {/* <nav> will change into Links once completed */}
-                {/* <Link to='/user/create' className='navlink'>Create</Link> */}
+                <Link to='/user/create' className='navlink'>Create</Link> 
                 <Link to='/' className='navlink'>Home</Link>
                     {'|'}
                 <Link to='/signup' className='navlink'>Sign Up</Link> 

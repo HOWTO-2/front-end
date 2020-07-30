@@ -172,15 +172,6 @@ function App(props) {
   ////////////┬─┬ ノ( ゜-゜ノ)
   ////AXIOSREQUESTFUNCTIONS┬─┬ ノ( ゜-゜ノ)
   ////////////////////////////////////////┬─┬ ノ( ゜-゜ノ)
-  const getCards = () => {
-    axios.get('https://reqres.in/api/users?page=2')
-      .then(res => {
-        setHowToCards(res.data.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
 
   const postNewCard = newCard => {
     axios.post('https://reqres.in/api/users', newCard)
@@ -193,16 +184,6 @@ function App(props) {
       })
   }
 
-  const postNewUser = newUser => {
-    axios.post('https://reqres.in/api/users', newUser)
-      .then(res => {
-        setUser([res.data, ...users])
-        setSignUpFormValues(initialSignupValue)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
   ////////////////////////////////////////////////
   ////////////AXIOS ENDS HERE/////////////////////
   ///////////////////////////////////////////////
@@ -215,12 +196,12 @@ function App(props) {
 
       .validate(value)
 
-      .then(valid => {
+      .then(
         setFormErrors({
           ...formErrors,
           [name]: "",
         })
-      })
+      )
 
       .catch(err => {
         setFormErrors({
@@ -266,6 +247,7 @@ function App(props) {
   }, [])
 
   useEffect(() => {
+    console.log(signUpFormValues)
     formSchema.isValid(signUpFormValues).then(valid => {
       setDisabled(valid)
     })
@@ -365,7 +347,6 @@ function App(props) {
   );
 }
 const mapStateToProps = state => {
-  console.log(state)
   return {
     howto: state.howto,
     isloading: state.isloading,

@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { updateHowto } from './Store/actions/action'
+import { updateHowto, deleteHowto} from './Store/actions/action'
 import { connect } from "react-redux"; 
 
 const StyledAddForm = styled.form`
@@ -50,13 +50,11 @@ const initialState = {
 }
 
 function EditHowToForm(props){
-    const { id } = useParams();
+    const params = useParams();
     const { push } = useHistory();
-    console.log(id)
     const [thisUser, setThisUser] = useState(initialState);
     
-
-    const fetchHowToTwo = () => {
+    const fetchHowToTwo = (id) => {
           axios
           .get(`https://reqres.in/api/users/${id}`)
           .then(res => {
@@ -67,9 +65,10 @@ function EditHowToForm(props){
           }
 
     useEffect(() => {
-        fetchHowToTwo();
-    }, [])
-    const { inputChange, submit, disabled, errors } = props
+        fetchHowToTwo(params.id);
+    }, [params.id])
+    
+    const {disabled, errors } = props
 
     const onInputChange = e =>{ 
         e.persist();
@@ -78,16 +77,20 @@ function EditHowToForm(props){
             [e.target.name]: e.target.value
         });
     }
-
     const onSubmit = e =>{
         e.preventDefault()
         props.updateHowto(thisUser)
     }
 
-    console.log(thisUser)
-    console.log(thisUser.email)
-    
+    const handleDelete = e =>{
+        //console.log(thisUser)
+        e.preventDefault()
+        props.deleteHowto()
+        //console.log(props.howto)
+    }
+
     return(
+        <>
         <StyledAddForm
             onSubmit={onSubmit}
         >
@@ -102,6 +105,7 @@ function EditHowToForm(props){
                     name='first_name'
                     type='text'
                     onChange={onInputChange}
+                    value = {thisUser.first_name}
                     value={thisUser.first_name}
                     />
             </label>
@@ -126,6 +130,8 @@ function EditHowToForm(props){
             <br></br>
             <button disabled={disabled}> Confirm Changes </button>
         </StyledAddForm>
+        <button onClick={handleDelete}>delete</button>
+        </>
     )
 }
 const mapStateToProps = state => {
@@ -136,5 +142,5 @@ const mapStateToProps = state => {
       error: state.error
     };
   };
-export default connect(mapStateToProps,{updateHowto})(EditHowToForm);
+export default connect(mapStateToProps,{updateHowto, deleteHowto})(EditHowToForm);
   
