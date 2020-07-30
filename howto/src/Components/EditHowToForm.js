@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import {useParams, useHistory} from 'react-router-dom'
+import axios from 'axios'
+import { updateHowto } from './Store/actions/action'
+import { connect } from "react-redux"; 
 
 const StyledAddForm = styled.form`
 display: flex;
@@ -39,17 +43,46 @@ button{
 }
 `
 
-export default function EditHowToForm(props){
+const intialState = {
+    email: '',
+    first_name: '',
+    last_name: ''
+}
+
+function EditHowToForm(props){
+    const params = useParams();
+    
+    const [thisUser, setThisUser] = useState(intialState)
+
+    const fetchHowto = ()=>{
+        axios
+        .get(`https://reqres.in/api/users/${params.id}`)
+        .then(res=>{console.log(res)
+            setThisUser(res.data.data)
+        })
+        .catch(err=>{console.log(err)})
+    }
+
+    useEffect(()=>{
+        fetchHowto()
+    },[])
+
     const { inputChange, submit, disabled, errors } = props
 
     const onInputChange = e =>{ 
-        const { name, value } = e.target
-        inputChange(name, value)
+        setThisUser(
+            {
+                ...thisUser,
+                [e.target.name]: e.target.value
+            }
+        )
     }
-
+    const { push } = useHistory();
     const onSubmit = e =>{
         e.preventDefault()
-        //submit()
+        props.updateHowto(thisUser)
+        
+        //push('/')
     }
 
     return(
@@ -64,25 +97,28 @@ export default function EditHowToForm(props){
             <h2>Edit this How To</h2>
             <label>Title
                 <input
-                    name='title'
+                    name='first_name'
                     type='text'
                     onChange={onInputChange}
+                    value = {thisUser.first_name}
                     />
             </label>
 
             <label>Name
                 <input
-                    name='author'
+                    name='last_name'
                     type='text'
                     onChange={onInputChange}
+                    value = {thisUser.last_name}
                 />
             </label>
             
             <label>Topic
                 <input
-                    name='topic'
+                    name='email'
                     type='text'
                     onChange={onInputChange}
+                    value = {thisUser.email}
                 />
             </label>
 
@@ -99,3 +135,11 @@ export default function EditHowToForm(props){
         </StyledAddForm>
     )
 }
+const mapStateToProps = state => {
+    return {
+      howto: state.howto,
+      isloading: state.isloading,
+      error: state.error
+    };
+  };
+export default connect(mapStateToProps,{updateHowto})(EditHowToForm)

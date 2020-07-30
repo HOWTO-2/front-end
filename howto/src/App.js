@@ -268,7 +268,7 @@ function App(props) {
 
         <StyledLowerTopDiv>
 
-          <Route path='/user/edit'>
+          <Route path={`/user/edit/:id`}>
             <EditHowToForm
               inputChange={inputChange}
               submit={submitCard}
@@ -328,7 +328,7 @@ function App(props) {
           </form>
         </div>
         {props.isLoading && <h2>LOADING...</h2>}
-        {props.error && (<p>ERROR {this.props.error}</p>)}
+        {props.error && (<p>ERROR {props.error}</p>)}
 
         {props.howto.length > 0 &&(
           props.howto[0].map(card=>{

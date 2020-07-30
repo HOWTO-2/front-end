@@ -10,7 +10,7 @@
   
   const initialState = {
     user: [],
-    howto:[],
+    howto:[[]],
     isloading : false,
     error: ''       
   };
@@ -32,7 +32,7 @@
         return {
           ...state,
           isloading: false,
-          howto: [...state.howto, action.payload]
+          howto: [...state.howto[0], action.payload]
         };
       case FETCH_HOWTO_FAIL:  
         return {
@@ -46,11 +46,22 @@
         isloading: true
       };
       case UPDATE_HOWTO_SUCCESS:  
-        return {
+      console.log('///////////', state)
+      console.log('///////////', [state.howto[0]])
+      console.log('///////////', state.howto[0][1].id)
+      console.log('///////////', action.payload.id)
+      state.howto[0].map((item)=>{
+        console.log(item)
+        if (state.howto[0][item].id === action.payload.id){
+        console.log(item)}
+        else{console.log('darn')}
+      })
+        return (
+          {
           ...state,
           isloading: false,
-          howto: [...state.howto, action.payload]
-        };
+          howto: [[...state.howto[0], {0: action.payload}, action.payload]]
+        })
       case UPDATE_HOWTO_FAIL:  
         return {
           ...state,

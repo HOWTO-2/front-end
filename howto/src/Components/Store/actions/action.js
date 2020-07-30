@@ -51,13 +51,15 @@ export const fetchHowto = () => {
   };
 
 
+
   export const updateHowto = (state) => {
     return dispatch => {
       dispatch({ type: UPDATE_HOWTO_START} );
-
+      console.log(state)
       axios.put(`https://reqres.in/api/users/${state.id}`, state)
       .then(res=>{console.log(res)
-          dispatch({ type: UPDATE_HOWTO_SUCCESS, payload: res.data.data} );
+          dispatch({ type: UPDATE_HOWTO_SUCCESS, payload: res.data} 
+            );
   })
       .catch(err=>{ dispatch({ type: UPDATE_HOWTO_FAIL, payload: err} );
     })
