@@ -6,7 +6,10 @@
       FETCH_HOWTO_SUCCESS,
       UPDATE_HOWTO_FAIL,
       UPDATE_HOWTO_START,
-      UPDATE_HOWTO_SUCCESS
+      UPDATE_HOWTO_SUCCESS,
+      DELETE_HOWTO_FAIL,
+      DELETE_HOWTO_START,
+      DELETE_HOWTO_SUCCESS
     } from '../actions/action'
   
   const initialState = {
@@ -64,6 +67,24 @@
           isloading: false,
           error: action.payload
         };
+        case DELETE_HOWTO_START:  
+        return {
+          ...state,
+          isloading: true
+        };
+        case DELETE_HOWTO_SUCCESS:
+          return {
+            ...state,
+            isloading: false,
+            howto: [[...state.howto[0].filter(v => v.id !== action.payload.id)]]
+
+          };
+        case DELETE_HOWTO_FAIL:  
+          return {
+            ...state,
+            isloading: false,
+            error: action.payload
+          };
         default:
           return state;
     }

@@ -47,7 +47,7 @@ const initialState = {
 }
 
 function AddHowToForm(props){
-    const { inputChange, submit, disabled, errors } = props
+    const { disabled, errors } = props
     const [state, setState] = useState(initialState)
 
     // const onInputChange = e =>{ 
