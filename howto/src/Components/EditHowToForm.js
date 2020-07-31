@@ -86,7 +86,10 @@ function EditHowToForm(props){
         //console.log(props.howto)
         //console.log(thisUser)
         e.preventDefault()
-        props.deleteHowto()
+        props.deleteHowto(thisUser)
+        if(props.isloading===false){
+            push('/')
+        }
     }
 
     return(
@@ -109,8 +112,8 @@ function EditHowToForm(props){
                     value={thisUser.first_name}
                     />
             </label>
-
-            <label>Last Name
+            
+            <label>Last Name  
                 <input
                     name='last_name'
                     type='text'

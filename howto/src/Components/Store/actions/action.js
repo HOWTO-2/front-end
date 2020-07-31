@@ -56,15 +56,15 @@ export const fetchHowto = () => {
     return dispatch => {
       dispatch({ type: DELETE_HOWTO_START} );
 
-      axios.delete(`https://reqres.in/api/users/2`)
-      .then(res=>{console.log('INSIDE DELETE FUNCTION', res)
-          dispatch({ type: DELETE_HOWTO_SUCCESS} );
+      axios.delete(`https://reqres.in/api/users/${state.id}` )
+      .then(res=>{console.log('INSIDE DELETE FUNCTION', state)
+          dispatch({ type: DELETE_HOWTO_SUCCESS , payload: state} );
   })
       .catch(err=>{ dispatch({ type: DELETE_HOWTO_FAIL, payload: err} );
     })
     };
   };
-
+    
 
 
   export const updateHowto = (state) => {
