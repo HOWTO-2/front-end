@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom'
 
 // COMPONENT IMPORTS
 import Header from './Components/Header'
-import HowToCard from './Components/HowToCard'
+
 import Signup from './Components/Signup'
 import formSchema from './Components/Validation/FormSchema'
 import Login from './Components/Login'
@@ -25,10 +25,10 @@ const initialSignupValue = {
   email: '',
 }
 
-const initialLogIn = {
-  username: '',
-  password: ''
-}
+// const initialLogIn = {
+//   username: '',
+//   password: ''
+// }
 
 const initialHowToForm = {
   username: '',
@@ -78,16 +78,16 @@ function App() {
       })
   }
 
-  const postNewCard = newCard => {
-    axios.post('https://reqres.in/api/users', newCard)
-      .then(res => {
-        setHowToCards([res.data, ...howToCards])
-        setHowToFormValues(initialHowToForm)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  // const postNewCard = newCard => {
+  //   axios.post('https://reqres.in/api/users', newCard)
+  //     .then(res => {
+  //       setHowToCards([res.data, ...howToCards])
+  //       setHowToFormValues(initialHowToForm)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
 
   const postNewUser = newUser => {
     axios.post('https://reqres.in/api/users', newUser)
@@ -143,14 +143,14 @@ function App() {
 
   }
 
-  const submitCard = () => {
-    const newCard = {
-      username: howToFormValues.username.trim(),
-      topic: howToFormValues.topic.trim(),
-      steps: howToFormValues.steps.trim(),
-    }
-    postNewCard(newCard)
-  }
+  // const submitCard = () => {
+  //   const newCard = {
+  //     username: howToFormValues.username.trim(),
+  //     topic: howToFormValues.topic.trim(),
+  //     steps: howToFormValues.steps.trim(),
+  //   }
+  //   postNewCard(newCard)
+  // }
 
 
   ////////////////////////////////////

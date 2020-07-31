@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+
 export default function Login(props) {
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -39,27 +40,9 @@ export default function Login(props) {
              variant="contained"
              color="primary"
             >Log In</Button>
+          
 
         </form>
 
     )
 }
-
-{/* <label>Username
-<input
-        name='username'
-        type='text'
-        maxLength='15'
-    // value={}
-    // onChange={}
-    />
-</label>
-<label>Password
-    <input
-        name='password'
-        type='password'
-        maxLength='15'
-    // value={props.username}
-    // onChange={}
-    />
-</label> */}

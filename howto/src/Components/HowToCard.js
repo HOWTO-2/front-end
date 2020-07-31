@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
@@ -44,9 +43,3 @@ export default function HowToCard({ card }) {
 }
 
 
-{/* <div>           */ }
-{/*             
-<p>Author:{card.first_name}{card.last_name}</p>
-<p>Topic:{card.email}</p>
-<p>Guide:{card.avatar}</p>
-</div> */}
